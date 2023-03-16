@@ -1,8 +1,7 @@
 use std::env;
-use std::thread::sleep;
 
 use anyhow::{anyhow, Context, Result};
-use chrono::{Duration, NaiveDateTime};
+use chrono::NaiveDateTime;
 use dotenvy::dotenv;
 use serde::{Deserialize, Deserializer};
 use serde_derive::Deserialize;
@@ -15,13 +14,7 @@ fn main() -> Result<()> {
   let lon = env_var("LON")?;
   let github_token = env_var("GITHUB_TOKEN")?;
 
-  const INTERVAL: i64 = 6;
-  let interval = Duration::hours(INTERVAL).to_std().unwrap();
-  loop {
-    update_status(&weather_key, &github_token, &lat, &lon)?;
-    println!("Next update in {INTERVAL} hours");
-    sleep(interval);
-  }
+  update_status(&weather_key, &github_token, &lat, &lon)
 }
 
 fn env_var(name: &str) -> Result<String> {
