@@ -1,6 +1,6 @@
 use anyhow::Result;
 use chrono::NaiveDateTime;
-use serde::{Deserialize, Deserializer};
+use serde::Deserializer;
 use serde_derive::Deserialize;
 
 #[derive(Deserialize)]
@@ -32,7 +32,7 @@ fn datetime_deserializer<'de, D>(deserializer: D) -> Result<NaiveDateTime, D::Er
 where
   D: Deserializer<'de>,
 {
-  let s: String = Deserialize::deserialize(deserializer)?;
+  let s: String = serde::Deserialize::deserialize(deserializer)?;
   // 2023-03-08 17:30
   NaiveDateTime::parse_from_str(&s, "%Y-%m-%d %H:%M").map_err(serde::de::Error::custom)
 }

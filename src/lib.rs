@@ -9,7 +9,7 @@ pub fn update_status(
   guthub_access_token: &str,
   lat: &str,
   lon: &str,
-) -> Result<()> {
+) -> Result<String> {
   let weather = fetch_weather(weather_api_key, lat, lon).context("failed to fetch weather")?;
 
   let Weather {
@@ -23,7 +23,9 @@ pub fn update_status(
   let text = condition.text;
   println!("Setting status to {emoji} ({text})");
 
-  update_github_status_emoji(guthub_access_token, emoji).context("failed to set status")
+  update_github_status_emoji(guthub_access_token, emoji).context("failed to set status")?;
+
+  Ok(text)
 }
 
 // Too bad there is not enough different emojis.

@@ -11,7 +11,7 @@ fn main() -> Result<()> {
   let lon = env_var("LON")?;
   let github_token = env_var("GITHUB_TOKEN")?;
 
-  gh_weather::update_status(&weather_key, &github_token, &lat, &lon)
+  gh_weather::update_status(&weather_key, &github_token, &lat, &lon).map(|_| ())
 }
 
 fn env_var(name: &str) -> Result<String> {
