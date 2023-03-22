@@ -1,6 +1,6 @@
 [package]
 name = "gh-weather"
-version = "0.4.0"
+version = "0.5.0"
 edition = "2021"
 authors = ["Sergei Parshukov <codedby@bugman.me>"]
 license = "MIT"
@@ -13,7 +13,6 @@ members = ["aws-lambda"]
 
 [dependencies]
 anyhow = "1.0.70"
-chrono = { version = "0.4.23", features = ["serde"] }
 dotenvy = "0.15.6"
 serde = "1.0.153"
 serde_derive = "1.0.153"

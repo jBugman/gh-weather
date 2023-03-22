@@ -2,7 +2,7 @@ use anyhow::{anyhow, Context, Result};
 
 mod weather;
 
-use crate::weather::{fetch_weather, Weather};
+use crate::weather::fetch_weather;
 
 pub fn update_status(
   weather_api_key: &str,
@@ -12,12 +12,7 @@ pub fn update_status(
 ) -> Result<String> {
   let weather = fetch_weather(weather_api_key, lat, lon).context("failed to fetch weather")?;
 
-  let Weather {
-    condition,
-    last_updated,
-  } = weather;
-
-  println!("The weather last updated {last_updated}");
+  let condition = weather.condition;
 
   let emoji = emoji_from_code(condition.code);
   let text = condition.text;
