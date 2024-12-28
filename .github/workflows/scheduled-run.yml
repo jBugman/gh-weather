@@ -5,6 +5,10 @@ on:
     - cron: '0 * * * *'  # Run every hour
   workflow_dispatch:     # Allow manual triggers
 
+permissions:
+  contents: read
+  packages: read
+
 jobs:
   run-container:
     runs-on: ubuntu-latest
