@@ -24,10 +24,11 @@ jobs:
 
       - name: Pull and run container
         run: |
-          docker pull ghcr.io/${{ github.repository }}/gh-weather:latest
+          REPO=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          docker pull ghcr.io/${REPO}/gh-weather:latest
           docker run --rm \
             -e OPENWEATHER_API_KEY="${{ secrets.OPENWEATHER_API_KEY }}" \
             -e LATITUDE="${{ secrets.LATITUDE }}" \
             -e LONGITUDE="${{ secrets.LONGITUDE }}" \
             -e GITHUB_TOKEN="${{ secrets.GH_PAT }}" \
-            ghcr.io/${{ github.repository }}/gh-weather:latest
+            ghcr.io/${REPO}/gh-weather:latest
