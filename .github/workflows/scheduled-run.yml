@@ -27,8 +27,8 @@ jobs:
           REPO=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
           docker pull ghcr.io/${REPO}:latest
           docker run --rm \
-            -e OPENWEATHER_API_KEY="${{ secrets.OPENWEATHER_API_KEY }}" \
-            -e LATITUDE="${{ secrets.LATITUDE }}" \
-            -e LONGITUDE="${{ secrets.LONGITUDE }}" \
+            -e WEATHERAPICOM_API_KEY="${{ secrets.WEATHERAPICOM_API_KEY }}" \
+            -e LAT="${{ secrets.LAT }}" \
+            -e LON="${{ secrets.LON }}" \
             -e GITHUB_TOKEN="${{ secrets.GH_PAT }}" \
             ghcr.io/${REPO}:latest
