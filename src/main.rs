@@ -1,11 +1,21 @@
 use std::env;
 
 use anyhow::{anyhow, Result};
+#[cfg(not(feature = "prod"))]
 use dotenvy::dotenv;
 
+#[cfg(not(feature = "prod"))]
 fn main() -> Result<()> {
   dotenv()?;
+  run()
+}
 
+#[cfg(feature = "prod")]
+fn main() -> Result<()> {
+  run()
+}
+
+fn run() -> Result<()> {
   let weather_key = env_var("WEATHERAPICOM_API_KEY")?;
   let lat = env_var("LAT")?;
   let lon = env_var("LON")?;

@@ -1,6 +1,6 @@
 [package]
 name = "gh-weather"
-version = "0.5.2"
+version = "0.6.0"
 edition = "2021"
 authors = ["Sergei Parshukov <codedby@bugman.me>"]
 license = "MIT"
@@ -8,8 +8,8 @@ repository = "https://github.com/jBugman/weather"
 description = "Update your GitHub status with the current weather at your location"
 publish = false
 
-[workspace]
-members = ["aws-lambda"]
+[features]
+prod = []
 
 [dependencies]
 anyhow = "1.0"

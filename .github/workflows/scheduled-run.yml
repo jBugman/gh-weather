@@ -1,0 +1,29 @@
+name: Scheduled Container Run
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Run every hour
+  workflow_dispatch:     # Allow manual triggers
+
+jobs:
+  run-container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+
+    steps:
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull and run container
+        run: |
+          docker pull ghcr.io/${{ github.repository }}/gh-weather:latest
+          docker run --rm \
+            -e OPENWEATHER_API_KEY="${{ secrets.OPENWEATHER_API_KEY }}" \
+            -e LATITUDE="${{ secrets.LATITUDE }}" \
+            -e LONGITUDE="${{ secrets.LONGITUDE }}" \
+            -e GITHUB_TOKEN="${{ secrets.GH_PAT }}" \
+            ghcr.io/${{ github.repository }}/gh-weather:latest
