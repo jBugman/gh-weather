@@ -1,5 +1,5 @@
 use anyhow::Result;
-use serde_derive::Deserialize;
+use serde::Deserialize;
 
 #[derive(Deserialize)]
 struct Response {
