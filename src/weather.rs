@@ -20,6 +20,6 @@ pub struct Condition {
 pub fn fetch_weather(api_key: &str, lat: &str, lon: &str) -> Result<Weather> {
   let url =
     format!("https://api.weatherapi.com/v1/current.json?key={api_key}&q={lat},{lon}&aqi=no)");
-  let resp = ureq::get(&url).call()?.into_json::<Response>()?;
+  let resp = ureq::get(&url).call()?.body_mut().read_json::<Response>()?;
   Ok(resp.current)
 }

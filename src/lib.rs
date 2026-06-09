@@ -94,9 +94,10 @@ pub fn update_github_status_emoji(access_token: &str, emoji: &str) -> Result<()>
   );
 
   let resp = ureq::post(URL)
-    .set("Authorization", &format!("Bearer {access_token}"))
-    .send_string(&payload)?
-    .into_json::<serde_json::Value>()
+    .header("Authorization", &format!("Bearer {access_token}"))
+    .send(payload.as_str())?
+    .body_mut()
+    .read_json::<serde_json::Value>()
     .context("failed to call github graphql api")?;
 
   let resp_emoji = resp["data"]["changeUserStatus"]["status"]
